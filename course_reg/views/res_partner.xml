@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherit_contact" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="school_category" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="courses" string="Courses" attrs="{'invisible': [('school_category', '!=', 'student')]}">
+                    <field name="courses" />
+                </page>
+                <page name="courses_taught" string="Courses Taught" attrs="{'invisible': [('school_category', '!=', 'teacher')]}">
+                    <field name="courses_taught" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
